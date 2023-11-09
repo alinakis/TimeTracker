@@ -1,4 +1,4 @@
-from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, PageTemplate, Frame, Image, Paragraph
+from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, PageTemplate, Frame, Paragraph
 from reportlab.lib.pagesizes import A4
 from reportlab.lib import colors
 from reportlab.pdfbase import pdfmetrics
@@ -10,6 +10,8 @@ from reportlab.lib.units import cm
 from reportlab.pdfbase.pdfmetrics import stringWidth
 from datetime import datetime
 import json
+import sys
+import os
 
 # Hour rate
 hour_rate = 40.0
@@ -18,8 +20,16 @@ hour_rate = 40.0
 with open('.timetracker', 'r') as f:
     data = json.load(f)
 
+# Check if we're running as a PyInstaller bundle
+if getattr(sys, 'frozen', False):
+    # We're running in a PyInstaller bundle
+    ttf_path = os.path.join(sys._MEIPASS, 'Roboto-Regular.ttf')
+else:
+    # We're running in a normal Python environment
+    ttf_path = 'Roboto-Regular.ttf'
+
 # Register the Roboto font
-pdfmetrics.registerFont(TTFont('Roboto', 'Roboto-Regular.ttf'))
+pdfmetrics.registerFont(TTFont('Roboto', ttf_path))
 
 # Create a new style based on the 'Normal' style
 styles = getSampleStyleSheet()
