@@ -14,7 +14,11 @@ import sys
 import os
 
 # Hour rate
-hour_rate = 40.0
+try:
+    hour_rate = float(input("Please enter the hourly rate: "))
+except ValueError:
+    print("That's not a valid hourly rate. Please enter a number.")
+    # You can then either exit the program or ask the user to enter the hourly rate again
 
 # Load data from .timetracker file
 with open('.timetracker', 'r') as f:
