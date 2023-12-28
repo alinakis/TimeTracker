@@ -44,7 +44,7 @@ footer_style = ParagraphStyle('Roboto', parent=styles['Normal'], fontName='Robot
 now = datetime.now()
 date_string = now.strftime("%Y%m%d%H%M%S")
 filename = "invoice_{}.pdf".format(date_string)
-doc = SimpleDocTemplate(filename, pagesize=A4)
+doc = SimpleDocTemplate(filename, pagesize=A4, leftMargin=50, rightMargin=50, topMargin=50, bottomMargin=50)
 
 def on_first_page(canvas, doc):
     # Save the state of our canvas so we can draw on it
